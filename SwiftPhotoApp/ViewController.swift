@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     @IBAction func refreshButton(sender: UIButton) {
         
         
-        let url = NSURL(string: "http://play.minio.io:8080/MinioJavaRESTExample-0.0.1-SNAPSHOT/minio/photoservice/list")
+        let url = NSURL(string: "http://play.minio.io:8080/PhotoAPIService-0.0.1-SNAPSHOT/minio/photoservice/list")
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
             
