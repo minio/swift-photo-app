@@ -1,44 +1,53 @@
 # Swift Photo App
 
-![minio_SWIFT1](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT1.png?raw=true)
+![minio_SWIFT1](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT1.jpg?raw=true)
 
 This example will guide you through the code to build a simple Swift Photo app. In this app, you will learn how a Swift client can use the Photo API Service and load a random image. Full code is available here: https://github.com/minio/swift-photo-app, released under Apache 2.0 License.
 
 ##  1. Dependencies
+
 We will be building this app using Xcode 7.0 with Swift 2.0. This app will also consume the Photo API Service we built to get presigned urls that are randomly loaded on click of a button.
 
 * Xcode 7.0 Beta
 * Swift 2.0
 
 ## 2. SetUp  
+
 Launch Xcode and complete the following steps.
 
  * Step 1 - Create a new Project. Select Single View Application as shown below and click Next. 
 
-![minio_SWIFT2](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT2.png?raw=true)
+
+![minio_SWIFT2](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT2.jpg?raw=true)
+
 
  * Step 2 - Fill in the Project Name and Organization Name and Identifiers. We have used the below in this example, feel free to customize it to your own needs. Click Next. 
 
-![minio_SWIFT3](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT3.png?raw=true)
+
+![minio_SWIFT3](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT3.jpg?raw=true)
+
 
  * Step 3 -  Now you have an empty MainStoryBoard that is ready to be worked on.
 
-![minio_SWIFT4](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT4.png?raw=true)
+![minio_SWIFT4](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT4.jpg?raw=true)
 
 
 ## 3. MainStoryBoard  
+ 
  * Let's drag and drop a UIButton to the StoryBoard.
  * Let's also drag and drop an imageView to the StoryBoard.
  * Select both and Add Missing Constraints.
  * Feel free to change the background colors of the UIButton and UIView.
 
-![minio_SWIFT5](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT5.png?raw=true)
+![minio_SWIFT5](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT5.jpg?raw=true)
 
  
 ## 4. ViewController.swift 
 
 We will use the Photo API Service we built earlier to service the SwiftPhotoApp client. For the sake of simplicity, we will not use a TableView or a CollectionView to display all of the photos. Instead we will randomly load one of the photos from the presigned URLs we receive from the PhotoAPI Service.
+
 ```swift
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -121,14 +130,20 @@ class ViewController: UIViewController {
     }
 
 }
+
 ```
+
 ## 5. Info.plist
+
 We need to add the permissions into our info.plist file so that the app can fetch the URLs & images from play.
 
-![minio_SWIFT6](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT6.png?raw=true)
+![minio_SWIFT6](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT6.jpg?raw=true)
+
 
 Here's the full info.plist file  if you prefer to see the xml version of the above changes.
+
 ```xml
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -188,13 +203,17 @@ Here's the full info.plist file  if you prefer to see the xml version of the abo
 </dict>
 
 </plist>
+
 ```
+
 ## 7. Run the App
+
 * Launch the iOS Simulator. 
 * Press the play button to run & deploy the app onto the simulator. 
 * Click on the Load Random Image Button to load a different image overtime.
 
 ## 8. Explore Further
+
 - [Photo API Service Example](https://docs.minio.io/docs/java-photo-api-service)
 - [Using `minio-java`client SDK with Minio Server](https://docs.minio.io/docs/java-client-quickstart-guide) 
 - [Minio Java Client SDK API Reference](https://docs.minio.io/docs/java-client-api-reference)
