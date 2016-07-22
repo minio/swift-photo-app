@@ -1,4 +1,4 @@
-# Swift Photo App
+# Swift Photo App (https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![minio_SWIFT1](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT1.jpg?raw=true)
 
