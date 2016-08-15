@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // Asynchronous helper function that fecthes data from the PhotoAPIService.
+    // Asynchronous helper function that fetches data from the PhotoAPIService.
     func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
             completion(data: data, response: response, error: error)
