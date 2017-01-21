@@ -1,4 +1,4 @@
-# Swift Photo App [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/minio/minio?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Swift Photo App [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
 ![minio_SWIFT1](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT1.jpg?raw=true)
 
