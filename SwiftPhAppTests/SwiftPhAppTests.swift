@@ -1,14 +1,15 @@
 //
-//  SwiftPhotoAppTests.swift
-//  SwiftPhotoAppTests
+//  SwiftPhAppTests.swift
+//  SwiftPhAppTests
 //
-//  Created by Deepa Mahalingam on 4/21/16.
-//  Copyright © 2016 Deepa Mahalingam. All rights reserved.
+//  Created by Carter McClellan on 7/12/17.
+//  Copyright © 2017 Minio. All rights reserved.
 //
 
 import XCTest
+@testable import SwiftPhApp
 
-class SwiftPhotoAppTests: XCTestCase {
+class SwiftPhAppTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -27,7 +28,7 @@ class SwiftPhotoAppTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
