@@ -47,7 +47,6 @@ Launch Xcode and complete the following steps.
 We will use the Photo API Service we built earlier to service the SwiftPhotoApp client. For the sake of simplicity, we will not use a TableView or a CollectionView to display all of the photos. Instead we will randomly load one of the photos from the presigned URLs we receive from the PhotoAPI Service.
 
 ```swift
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -130,7 +129,6 @@ class ViewController: UIViewController {
     }
 
 }
-
 ```
 
 ## 5. Info.plist
@@ -143,7 +141,6 @@ We need to add the permissions into our info.plist file so that the app can fetc
 Here's the full info.plist file  if you prefer to see the xml version of the above changes.
 
 ```xml
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -203,7 +200,6 @@ Here's the full info.plist file  if you prefer to see the xml version of the abo
 </dict>
 
 </plist>
-
 ```
 
 ## 7. Run the App
