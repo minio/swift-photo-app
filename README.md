@@ -8,8 +8,8 @@ This example will guide you through the code to build a simple Swift Photo app. 
 
 We will be building this app using Xcode 7.0 with Swift 2.0. This app will also consume the Photo API Service we built to get presigned urls that are randomly loaded on click of a button.
 
-* Xcode 7.0 Beta
-* Swift 2.0
+* Xcode 8.3. Beta
+* Swift 3.1
 
 ## 2. SetUp  
 
@@ -18,7 +18,7 @@ Launch Xcode and complete the following steps.
  * Step 1 - Create a new Project. Select Single View Application as shown below and click Next. 
 
 
-![minio_SWIFT2](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT2.jpg?raw=true)
+![minio_SWIFT2](docs/screenshots/projectTemplate1.01.png?raw=true)
 
 
  * Step 2 - Fill in the Project Name and Organization Name and Identifiers. We have used the below in this example, feel free to customize it to your own needs. Click Next. 
