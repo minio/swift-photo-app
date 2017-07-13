@@ -18,7 +18,7 @@ Launch Xcode and complete the following steps.
  * Step 1 - Create a new Project. Select Single View Application as shown below and click Next. 
 
 
-![minio_SWIFT2](docs/screenshots/projectTemplate1.01.png?raw=true)
+![minio_SWIFT2](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/projectTemplate1.01.png?raw=true)
 
 
  * Step 2 - Fill in the Project Name and Organization Name and Identifiers. We have used the below in this example, feel free to customize it to your own needs. Click Next. 
@@ -29,7 +29,7 @@ Launch Xcode and complete the following steps.
 
  * Step 3 -  Now you have an empty MainStoryBoard that is ready to be worked on.
 
-![minio_SWIFT4](docs/screenshots/storyBoard1.01.png?raw=true)
+![minio_SWIFT4](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/storyBoard1.01.png?raw=true)
 
 
 ## 3. MainStoryBoard  
@@ -134,7 +134,7 @@ class ViewController: UIViewController {
 
 We need to add the permissions into our info.plist file so that the app can fetch the URLs & images from play.
 
-![minio_SWIFT6](docs/screenshots/infoplst1.01.png?raw=true)
+![minio_SWIFT6](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/infoplst1.01.png?raw=true)
 
 
 Here's the full info.plist file  if you prefer to see the xml version of the above changes.
