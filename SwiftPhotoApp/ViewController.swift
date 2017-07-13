@@ -16,82 +16,83 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBAction func refreshButton(sender: UIButton) {
+    
+    @IBAction func refButton(sender: UIButton) {
         
+        // Set up the URL Object.
+        let url = URL(string: "http://play.minio.io/PhotoAPIService/minio/photoservice/list")
         
-        let url = NSURL(string: "http://play.minio.io:8080/PhotoAPIService-0.0.1-SNAPSHOT/minio/photoservice/list")
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+        // Task fetches the url contents asynchronously.
+        let task = URLSession.shared.dataTask(with: url! as URL) {(data, response, error) in
             
-            let httpResponse = response as! NSHTTPURLResponse
+            let httpResponse = response as! HTTPURLResponse
             let statusCode = httpResponse.statusCode
             
+            // Process the response.
             if (statusCode == 200) {
                 
                 do{
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    // Get the json response.
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String:AnyObject]
                     
-                    if let albums = json["Album"] as? [[String: AnyObject]] {
+                    // Extract the Album json into the albums array.
+                    if let albums = json["Album"] as? [[String: AnyObject]]{
+                        
+                        // Pick a random index from the albums array.
                         let randomIndex = Int(arc4random_uniform(UInt32(albums.count)))
                         
-                        
+                        // Extract the url from the albums array using this random index we generated.
                         let loadImageUrl:String = albums[randomIndex]["url"]  as! String
                         
-                        self.imageView.contentMode = .ScaleAspectFit
-                        if let checkedUrl = NSURL(string: loadImageUrl) {
-                            self.imageView.contentMode = .ScaleAspectFit
-                            self.downloadImage(checkedUrl)
+                        // Prepare the imageView.
+                        self.imageView.contentMode = .scaleAspectFit
                         
+                        // Download and place the image in the image view with a helper function.
+                        if let checkedUrl = URL(string: loadImageUrl) {
+                            self.imageView.contentMode = .scaleAspectFit
+                            self.downloadImage(url: checkedUrl)
                         }
-                    
+                        
                     }
                 }
-                    catch {
-                        print("Error with Json: \(error)")
-                    }
+                catch {
+                    print("Error with Json: \(error)")
                 }
-                
-            
-            
+            }
             
         }
         
-        task!.resume()
+        task.resume()
         
     }
-    @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }!.resume()
+    // Asynchronous helper function that fetches data from the PhotoAPIService.
+    func getDataFromUrl(url:URL, completion: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: Error? ) -> Void)) {
+        URLSession.shared.dataTask(with: url as URL) { (data, response, error) in
+            completion(data, response, error)
+            }.resume()
     }
     
-    func downloadImage(url: NSURL){
-        print("Download Started")
-        print("lastPathComponent: " + (url.lastPathComponent ?? ""))
-        getDataFromUrl(url) { (data, response, error)  in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                guard let data = data where error == nil else { return }
-                
-                self.imageView.image = UIImage(data: data)
+    // Helper function that download asynchronously an image from a given url.
+    func downloadImage(url: URL){
+        getDataFromUrl(url: url) { (data, response, error)  in
+            DispatchQueue.main.async() { () -> Void in
+                guard let data = data, error == nil else { return }
+                self.imageView.image = UIImage(data: data as Data)
             }
         }
     }
-
+    
 }
 
