@@ -29,7 +29,7 @@ Launch Xcode and complete the following steps.
 
  * Step 3 -  Now you have an empty MainStoryBoard that is ready to be worked on.
 
-![minio_SWIFT4](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT4.jpg?raw=true)
+![minio_SWIFT4](docs/screenshots/storyBoard1.01.png?raw=true)
 
 
 ## 3. MainStoryBoard  
