@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     @IBAction func refButton(sender: UIButton) {
         
         // Set up the URL Object.
-        let url = URL(string: "http://play.minio.io/PhotoAPIService/minio/photoservice/list")
+        let url = URL(string: "http://play.minio.io/PhotoAPIService-0.0.1-SNAPSHOT/minio/photoservice/list")
         
         // Task fetches the url contents asynchronously.
         let task = URLSession.shared.dataTask(with: url! as URL) {(data, response, error) in
