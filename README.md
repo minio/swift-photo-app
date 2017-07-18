@@ -46,7 +46,8 @@ Launch Xcode and complete the following steps.
 We will use the Photo API Service we built earlier to service the SwiftPhotoApp client. For the sake of simplicity, we will not use a TableView or a CollectionView to display all of the photos. Instead we will randomly load one of the photos from the presigned URLs we receive from the PhotoAPI Service.
 
 ```swift
-mport UIKit
+
+import UIKit
 
 class ViewController: UIViewController {
     
@@ -109,12 +110,14 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     // Asynchronous helper function that fetches data from the PhotoAPIService.
     func getDataFromUrl(url:URL, completion: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: Error? ) -> Void)) {
         URLSession.shared.dataTask(with: url as URL) { (data, response, error) in
             completion(data, response, error)
             }.resume()
+
     }
     
     // Helper function that download asynchronously an image from a given url.
@@ -128,7 +131,6 @@ class ViewController: UIViewController {
     }
     
 }
-
 ```
 
 ## 5. Info.plist
