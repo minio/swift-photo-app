@@ -8,8 +8,8 @@ This example will guide you through the code to build a simple Swift Photo app. 
 
 We will be building this app using Xcode 7.0 with Swift 2.0. This app will also consume the Photo API Service we built to get presigned urls that are randomly loaded on click of a button.
 
-* Xcode 7.0 Beta
-* Swift 2.0
+* Xcode 8.3 Beta
+* Swift 3.1
 
 ## 2. SetUp  
 
@@ -18,7 +18,7 @@ Launch Xcode and complete the following steps.
  * Step 1 - Create a new Project. Select Single View Application as shown below and click Next. 
 
 
-![minio_SWIFT2](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT2.jpg?raw=true)
+![minio_SWIFT2](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/projectTemplate1.01.png?raw=true)
 
 
  * Step 2 - Fill in the Project Name and Organization Name and Identifiers. We have used the below in this example, feel free to customize it to your own needs. Click Next. 
@@ -29,14 +29,13 @@ Launch Xcode and complete the following steps.
 
  * Step 3 -  Now you have an empty MainStoryBoard that is ready to be worked on.
 
-![minio_SWIFT4](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT4.jpg?raw=true)
+![minio_SWIFT4](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/storyBoard1.01.png?raw=true)
 
 
 ## 3. MainStoryBoard  
  
  * Let's drag and drop a UIButton to the StoryBoard.
  * Let's also drag and drop an imageView to the StoryBoard.
- * Select both and Add Missing Constraints.
  * Feel free to change the background colors of the UIButton and UIView.
 
 ![minio_SWIFT5](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT5.jpg?raw=true)
@@ -50,92 +49,93 @@ We will use the Photo API Service we built earlier to service the SwiftPhotoApp 
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBAction func refreshButton(sender: UIButton) {
+    
+    @IBAction func refButton(sender: UIButton) {
         
         // Set up the URL Object.
-        let url = NSURL(string: "http://play.minio.io:8080/PhotoAPIService-0.0.1-SNAPSHOT/minio/photoservice/list")
+        let url = URL(string: "http://play.minio.io:8080/PhotoAPIService-0.0.1-SNAPSHOT/minio/photoservice/list")
         
         // Task fetches the url contents asynchronously.
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+        let task = URLSession.shared.dataTask(with: url! as URL) {(data, response, error) in
             
-            let httpResponse = response as! NSHTTPURLResponse
+            let httpResponse = response as! HTTPURLResponse
             let statusCode = httpResponse.statusCode
             
             // Process the response.
             if (statusCode == 200) {
                 
                 do{
-                		// Get the json response.
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                    // Get the json response.
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as! [String:AnyObject]
                     
                     // Extract the Album json into the albums array.
-                    if let albums = json["Album"] as? [[String: AnyObject]] {
-                    	
-                      	// Pick a random index from the albums array.
+                    if let albums = json["Album"] as? [[String: AnyObject]]{
+                        
+                        // Pick a random index from the albums array.
                         let randomIndex = Int(arc4random_uniform(UInt32(albums.count)))
                         
                         // Extract the url from the albums array using this random index we generated.
                         let loadImageUrl:String = albums[randomIndex]["url"]  as! String
                         
                         // Prepare the imageView.
-                        self.imageView.contentMode = .ScaleAspectFit
+                        self.imageView.contentMode = .scaleAspectFit
                         
                         // Download and place the image in the image view with a helper function.
-                        if let checkedUrl = NSURL(string: loadImageUrl) {
-                            self.imageView.contentMode = .ScaleAspectFit
-                            self.downloadImage(checkedUrl)
+                        if let checkedUrl = URL(string: loadImageUrl) {
+                            self.imageView.contentMode = .scaleAspectFit
+                            self.downloadImage(url: checkedUrl)
                         }
-                   
+                        
                     }
                 }
-                    catch {
-                        print("Error with Json: \(error)")
-                    }
+                catch {
+                    print("Error with Json: \(error)")
                 }
-    
+            }
+            
         }
         
-        task!.resume()
+        task.resume()
         
     }
-  
-@IBOutlet weak var imageView: UIImageView!
-     override func viewDidLoad() {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // Asynchronous helper function that fetches data from the PhotoAPIService.
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }!.resume()
+    func getDataFromUrl(url:URL, completion: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: Error? ) -> Void)) {
+        URLSession.shared.dataTask(with: url as URL) { (data, response, error) in
+            completion(data, response, error)
+            }.resume()
     }
     
     // Helper function that download asynchronously an image from a given url.
-    func downloadImage(url: NSURL){    
-        getDataFromUrl(url) { (data, response, error)  in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                guard let data = data where error == nil else { return }
-                self.imageView.image = UIImage(data: data)
+    func downloadImage(url: URL){
+        getDataFromUrl(url: url) { (data, response, error)  in
+            DispatchQueue.main.async() { () -> Void in
+                guard let data = data, error == nil else { return }
+                self.imageView.image = UIImage(data: data as Data)
             }
         }
     }
-
+    
 }
+
 ```
 
 ## 5. Info.plist
 
 We need to add the permissions into our info.plist file so that the app can fetch the URLs & images from play.
 
-![minio_SWIFT6](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/minio-SWIFT6.jpg?raw=true)
+![minio_SWIFT6](https://github.com/minio/swift-photo-app/blob/master/docs/screenshots/infoplst1.01.png?raw=true)
 
 
 Here's the full info.plist file  if you prefer to see the xml version of the above changes.
